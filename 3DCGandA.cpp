@@ -36,6 +36,29 @@ std::vector<unsigned int> MeshTriangles;
 //Declare your own global variables here:
 int myVariableThatServesNoPurpose;
 
+void printDisyplayModeType(DisplayModeType dmt) {
+	switch (dmt) {
+	case TRIANGLE:
+		printf("TRIANGLE");
+		break;
+	case FACE:
+		printf("FACE");
+		break;
+	case CUBE:
+		printf("CUBE");
+		break;
+	case ARM:
+		printf("ARM");
+		break;
+	case MESH:
+		printf("MESH");
+		break;
+	default:
+
+		break;
+	}
+}
+
 
 ////////// Draw Functions 
 
@@ -169,15 +192,25 @@ void display()
 	switch (DisplayMode)
 	{
 	case TRIANGLE:
-		drawMesh();
 		drawCoordSystem();
 		drawTriangle();
 		break;
 	case FACE:
+		drawCoordSystem();
 		drawUnitFace();
 		break;
-		//...
-
+	case CUBE:
+		drawCoordSystem();
+		drawUnitCube();
+		break;
+	case ARM:
+		drawCoordSystem();
+		drawArm();
+		break;
+	case MESH:
+		drawCoordSystem();
+		drawMesh();
+		break;
 	default:
 
 		break;
@@ -203,6 +236,9 @@ void keyboard(unsigned char key, int x, int y)
 	if ((key >= '1') && (key <= '9'))
 	{
 		DisplayMode = (DisplayModeType)(key - '0');
+		printf("display mode set to ");
+		printDisyplayModeType(DisplayMode);
+		printf("\n");
 		return;
 	}
 

@@ -1,2 +1,9 @@
-﻿  3DCGandA.vcxproj -> C:\Users\Ruben\Documents\TU Delft - Master Computer Science\3D Computer Graphics and Animation\3DCGandA\Debug\3DCGandA.exe
+﻿  3DCGandA.cpp
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(118): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(141): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(173): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(32): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(32): warning C4305: 'initializing': truncation from 'double' to 'float'
+  3DCGandA.vcxproj -> C:\Users\Ruben\Documents\TU Delft - Master Computer Science\3D Computer Graphics and Animation\3DCGandA\Debug\3DCGandA.exe
   3DCGandA.vcxproj -> C:\Users\Ruben\Documents\TU Delft - Master Computer Science\3D Computer Graphics and Animation\3DCGandA\Debug\3DCGandA.pdb (Full PDB)
