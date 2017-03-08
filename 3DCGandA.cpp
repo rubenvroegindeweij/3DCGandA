@@ -37,6 +37,11 @@ std::vector<unsigned int> MeshTriangles;
 int myVariableThatServesNoPurpose;
 float globalX = 0;
 
+float angle0 = 0;
+float angle1 = 0;
+float angle2 = 0;
+float stepSize = 2;
+
 void printDisyplayModeType(DisplayModeType dmt) {
 	switch (dmt) {
 	case TRIANGLE:
@@ -147,10 +152,10 @@ void drawUnitCube()
 	//glPushMatrix stores the current matrix and puts a copy on 
 	//the top of a stack.
 	//glPopMatrix pops the top matrix on the stack
-
+	
 	glPushMatrix();
-	glTranslatef(0.1,0.1,0.1);
-	glRotatef(20,0,0,1);
+	glTranslatef(0.1, 0.1, 0.1);
+	glRotatef(angle0, 0, 0, 1);
 	drawUnitFace();
 	glPopMatrix();
 }
@@ -169,6 +174,37 @@ void drawArm()
 
 	//3 optional) make an animated snake out of these boxes 
 	//(an arm with 10 joints that moves using the animate function)
+
+	// Upperarm.
+	glPushMatrix();
+	glTranslatef(0, 0, 0);
+	glRotatef(angle0, 0, 0, 1);
+	glPushMatrix();
+	glScalef(1, 0.2, 1);
+	drawUnitFace();
+	glPopMatrix();
+
+	// Forearm.
+	glPushMatrix();
+	glTranslatef(1, 0, 0);
+	glRotatef(angle1, 0, 0, 1);
+	glPushMatrix();
+	glScalef(1, 0.2, 1);
+	drawUnitFace();
+	glPopMatrix();
+
+	// Hand.
+	glPushMatrix();
+	glTranslatef(1, 0, 0);
+	glRotatef(angle2, 0, 0, 1);
+	glPushMatrix();
+	glScalef(2, 0.2, 1);
+	drawUnitFace();
+	glPopMatrix();
+
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
 }
 
 void drawLight()
@@ -278,6 +314,24 @@ void keyboard(unsigned char key, int x, int y)
 	case 'l':
 		//turn lighting off
 		glDisable(GL_LIGHTING);
+		break;
+	case 'q':
+		angle0 += stepSize;
+		break;
+	case 'a':
+		angle0 -= stepSize;
+		break;
+	case 'w':
+		angle1 += stepSize;
+		break;
+	case 's':
+		angle1 -= stepSize;
+		break;
+	case 'e':
+		angle2 += stepSize;
+		break;
+	case 'd':
+		angle2 -= stepSize;
 		break;
 	}
 }
