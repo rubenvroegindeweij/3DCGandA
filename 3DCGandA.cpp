@@ -35,6 +35,7 @@ std::vector<unsigned int> MeshTriangles;
 
 //Declare your own global variables here:
 int myVariableThatServesNoPurpose;
+float globalX = 0;
 
 void printDisyplayModeType(DisplayModeType dmt) {
 	switch (dmt) {
@@ -105,13 +106,20 @@ void drawTriangle()
 	//5) go to the function animate and increment this variable 
 	//by a small value - observe the animation.
 
-	glColor3f(1, 1, 1);
+	glColor3f(1, 0, 0);
 	glNormal3f(0, 0, 1);
 	glBegin(GL_TRIANGLES);
-	glVertex3f(0, 0, 0);
+	glVertex3f(globalX, 0, 0);
+	glVertex3f(0, 0, 1);
+	glVertex3f(1, 0, 1);
+	glEnd();
+	glColor3f(0, 0, 1);
+	glBegin(GL_TRIANGLES);
+	glVertex3f(globalX, 0, 0);
 	glVertex3f(1, 0, 0);
 	glVertex3f(1, 1, 0);
 	glEnd();
+
 }
 
 
@@ -120,6 +128,15 @@ void drawUnitFace()
 	//1) draw a unit quad in the x,y plane oriented along the z axis
 	//2) make sure the orientation of the vertices is positive (counterclock wise)
 	//3) What happens if the order is inversed?
+
+	glColor3f(0, 1, 0);
+	glNormal3f(0, 0, 1);
+	glBegin(GL_QUADS);
+	glVertex3f(0, 0, 0);
+	glVertex3f(1, 0, 0);
+	glVertex3f(1, 1, 0);
+	glVertex3f(0, 1, 0);
+	glEnd();
 }
 
 void drawUnitCube()
@@ -131,6 +148,11 @@ void drawUnitCube()
 	//the top of a stack.
 	//glPopMatrix pops the top matrix on the stack
 
+	glPushMatrix();
+	glTranslatef(0.1,0.1,0.1);
+	glRotatef(20,0,0,1);
+	drawUnitFace();
+	glPopMatrix();
 }
 
 void drawArm()
@@ -223,7 +245,10 @@ void display()
 */
 void animate()
 {
-
+	globalX += 0.0001;
+	if (globalX >= 2) {
+		globalX = 0;
+	}
 }
 
 
