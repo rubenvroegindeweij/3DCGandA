@@ -42,6 +42,8 @@ float angle1 = 0;
 float angle2 = 0;
 float stepSize = 2;
 
+float lightStepSize = 0.1;
+
 void printDisyplayModeType(DisplayModeType dmt) {
 	switch (dmt) {
 	case TRIANGLE:
@@ -112,13 +114,14 @@ void drawTriangle()
 	//by a small value - observe the animation.
 
 	glColor3f(1, 0, 0);
-	glNormal3f(0, 0, 1);
+	glNormal3f(0, 1, 0);
 	glBegin(GL_TRIANGLES);
 	glVertex3f(globalX, 0, 0);
 	glVertex3f(0, 0, 1);
 	glVertex3f(1, 0, 1);
 	glEnd();
 	glColor3f(0, 0, 1);
+	glNormal3f(0, 0, 1);
 	glBegin(GL_TRIANGLES);
 	glVertex3f(globalX, 0, 0);
 	glVertex3f(1, 0, 0);
@@ -220,6 +223,11 @@ void drawLight()
 	//and observe the shading after pressing 'L' to activate the lighting
 	//you can use 'l' to turn it off again
 
+	glColor3f(1, 1, 0);
+	glPushMatrix();
+	glTranslatef(LightPos[0], LightPos[1], LightPos[2]);
+	glutSolidSphere(0.1, 100, 100);
+	glPopMatrix();
 }
 
 
@@ -332,6 +340,24 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'd':
 		angle2 -= stepSize;
+		break;
+	case 'r':
+		LightPos[0] += lightStepSize;
+		break;
+	case 'f':
+		LightPos[0] -= lightStepSize;
+		break;
+	case 't':
+		LightPos[1] += lightStepSize;
+		break;
+	case 'g':
+		LightPos[1] -= lightStepSize;
+		break;
+	case 'y':
+		LightPos[2] += lightStepSize;
+		break;
+	case 'h':
+		LightPos[2] -= lightStepSize;
 		break;
 	}
 }
