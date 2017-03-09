@@ -32,6 +32,7 @@ unsigned int H_fen = 800;  // screen height
 float LightPos[4] = { 1,1,0.4,1 };
 std::vector<float> MeshVertices;
 std::vector<unsigned int> MeshTriangles;
+std::vector<float> MeshTriangleNormals;
 
 //Declare your own global variables here:
 int myVariableThatServesNoPurpose;
@@ -119,10 +120,9 @@ void drawTriangle()
 	glVertex3f(globalX, 0, 0);
 	glVertex3f(0, 0, 1);
 	glVertex3f(1, 0, 1);
-	glEnd();
+
 	glColor3f(0, 0, 1);
 	glNormal3f(0, 0, 1);
-	glBegin(GL_TRIANGLES);
 	glVertex3f(globalX, 0, 0);
 	glVertex3f(1, 0, 0);
 	glVertex3f(1, 1, 0);
@@ -245,7 +245,17 @@ void drawMesh()
 	// What do you observe with respect to the lighting?
 
 	//4) try loading your own model (export it from Blender as a Wavefront obj) and replace the provided mesh file.
+	glColor3f(0, 0, 1);
+	glBegin(GL_TRIANGLES);
 
+	for (unsigned int i = 0; i < MeshTriangles.size(); i++){
+		if (i % 3 == 0) {
+			glNormal3f(MeshTriangleNormals[i], MeshTriangleNormals[i+1], MeshTriangleNormals[i+2]);
+		}
+		int vertexNumber = MeshTriangles[i];
+		glVertex3f(MeshVertices[vertexNumber *3 ], MeshVertices[vertexNumber * 3 + 1], MeshVertices[vertexNumber * 3 + 2]);
+	}
+	glEnd();
 }
 
 
@@ -585,6 +595,22 @@ bool loadMesh(const char * filename)
 	}
 	fclose(in);
 	centerAndScaleToUnit(MeshVertices);
+
+	// Compute triangle normals.
+	for (unsigned int i = 0; i < MeshTriangles.size(); i += 3) {
+		float p1[] = { MeshVertices[MeshTriangles[i] * 3], MeshVertices[MeshTriangles[i] * 3 + 1], MeshVertices[MeshTriangles[i] * 3 + 2] };
+		float p2[] = { MeshVertices[MeshTriangles[i + 1] * 3], MeshVertices[MeshTriangles[i + 1] * 3 + 1], MeshVertices[MeshTriangles[i + 1] * 3 + 2] };
+		float p3[] = { MeshVertices[MeshTriangles[i + 2] * 3], MeshVertices[MeshTriangles[i + 2] * 3 + 1], MeshVertices[MeshTriangles[i + 2] * 3 + 2] };
+		float u[] = { p2[0] - p1[0], p2[1] - p1[1] , p2[2] - p1[2] };
+		float v[] = { p3[0] - p1[0], p3[1] - p1[1] , p3[2] - p1[2] };
+		float N[] = { u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0] };
+		float length = sqrt(N[0] * N[0] + N[1] * N[1] + N[2] * N[2]);
+		float normalizedN[] = { N[0] / length, N[1] / length, N[2] / length };
+		MeshTriangleNormals.push_back(normalizedN[0]);
+		MeshTriangleNormals.push_back(normalizedN[1]);
+		MeshTriangleNormals.push_back(normalizedN[2]);
+	}
+
 	return true;
 }
 
