@@ -23,6 +23,7 @@
 //The mode is used by the function display and the mode is 
 //chosen during execution with the keys 1-9
 enum DisplayModeType { TRIANGLE = 1, FACE = 2, CUBE = 3, ARM = 4, MESH = 5, };
+enum NormalsModeType { EQUAL = 1, EVERY_TRIANGLE = 2,  EVERY_VERTEX = 3};
 
 DisplayModeType DisplayMode = TRIANGLE;
 
@@ -33,6 +34,8 @@ float LightPos[4] = { 1,1,0.4,1 };
 std::vector<float> MeshVertices;
 std::vector<unsigned int> MeshTriangles;
 std::vector<float> MeshTriangleNormals;
+std::vector<float> MeshVertexNormals;
+std::vector<int> MeshVertexSumCount;
 
 //Declare your own global variables here:
 int myVariableThatServesNoPurpose;
@@ -42,6 +45,7 @@ float angle0 = 0;
 float angle1 = 0;
 float angle2 = 0;
 float stepSize = 2;
+NormalsModeType NormalsMode = EVERY_VERTEX;
 
 float lightStepSize = 0.1;
 
@@ -249,11 +253,23 @@ void drawMesh()
 	glBegin(GL_TRIANGLES);
 
 	for (unsigned int i = 0; i < MeshTriangles.size(); i++){
-		if (i % 3 == 0) {
-			glNormal3f(MeshTriangleNormals[i], MeshTriangleNormals[i+1], MeshTriangleNormals[i+2]);
-		}
 		int vertexNumber = MeshTriangles[i];
-		glVertex3f(MeshVertices[vertexNumber *3 ], MeshVertices[vertexNumber * 3 + 1], MeshVertices[vertexNumber * 3 + 2]);
+		switch (NormalsMode) {
+			case EQUAL:
+				break;
+			case EVERY_TRIANGLE:
+				if (i % 3 == 0) {
+					glNormal3f(MeshTriangleNormals[i], MeshTriangleNormals[i + 1], MeshTriangleNormals[i + 2]);
+				}
+				break;
+			case EVERY_VERTEX:
+				glNormal3f(MeshVertexNormals[vertexNumber * 3], MeshVertexNormals[vertexNumber * 3 + 1], MeshVertexNormals[vertexNumber * 3 + 2]);
+				break;
+			default:
+				break;
+		}
+
+		glVertex3f(MeshVertices[vertexNumber * 3 ], MeshVertices[vertexNumber * 3 + 1], MeshVertices[vertexNumber * 3 + 2]);
 	}
 	glEnd();
 }
@@ -368,6 +384,15 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'h':
 		LightPos[2] -= lightStepSize;
+		break;
+	case 'z':
+		NormalsMode = EQUAL;
+		break;
+	case 'x':
+		NormalsMode = EVERY_TRIANGLE;
+		break;
+	case 'c':
+		NormalsMode = EVERY_VERTEX;
 		break;
 	}
 }
@@ -596,6 +621,8 @@ bool loadMesh(const char * filename)
 	fclose(in);
 	centerAndScaleToUnit(MeshVertices);
 
+	MeshVertexNormals.resize(MeshVertices.size(), 0);
+	MeshVertexSumCount.resize(MeshVertices.size()/3, 0);
 	// Compute triangle normals.
 	for (unsigned int i = 0; i < MeshTriangles.size(); i += 3) {
 		float p1[] = { MeshVertices[MeshTriangles[i] * 3], MeshVertices[MeshTriangles[i] * 3 + 1], MeshVertices[MeshTriangles[i] * 3 + 2] };
@@ -609,6 +636,20 @@ bool loadMesh(const char * filename)
 		MeshTriangleNormals.push_back(normalizedN[0]);
 		MeshTriangleNormals.push_back(normalizedN[1]);
 		MeshTriangleNormals.push_back(normalizedN[2]);
+
+		for (int j = 0; j < 3; j++) {
+			MeshVertexSumCount[MeshTriangles[i + j]]++;
+			for (int dimension = 0; dimension < 3; dimension++) {
+				MeshVertexNormals[MeshTriangles[i + j] * 3 + dimension] += normalizedN[dimension];
+			}
+		}
+	}
+
+	for (int i = 0; i < MeshVertexSumCount.size(); i++) {
+		int count = MeshVertexSumCount[i];
+		for (int dim = 0; dim < 3; dim++) {
+			MeshVertexNormals[i * 3 + dim] = MeshVertexNormals[i * 3 + dim] / count;
+		}
 	}
 
 	return true;

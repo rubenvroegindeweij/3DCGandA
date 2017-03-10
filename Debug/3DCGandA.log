@@ -3,13 +3,14 @@ c:\users\ruben\documents\tu delft - master computer science\3d computer graphics
 c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(118): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(141): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\trackball.h(173): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(32): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(32): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(46): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(160): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(186): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(195): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(204): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(302): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(33): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(33): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(50): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(164): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(190): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(199): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(208): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(318): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\ruben\documents\tu delft - master computer science\3d computer graphics and animation\3dcganda\3dcganda\3dcganda.cpp(648): warning C4018: '<': signed/unsigned mismatch
   3DCGandA.vcxproj -> C:\Users\Ruben\Documents\TU Delft - Master Computer Science\3D Computer Graphics and Animation\3DCGandA\Debug\3DCGandA.exe
   3DCGandA.vcxproj -> C:\Users\Ruben\Documents\TU Delft - Master Computer Science\3D Computer Graphics and Animation\3DCGandA\Debug\3DCGandA.pdb (Full PDB)
